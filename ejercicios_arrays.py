@@ -28,10 +28,14 @@ ciudades.append({'nombre': 'Cusco', 'habitantes': 20000})
 index = 0
 for ciudad in ciudades:
     if ciudad['nombre'] == 'Cusco':
-        ciudades.remove(ciudades[index])
+        ciudades.remove(ciudad)
     index = index + 1
-pprint(ciudades)
+    # index += 1
+# pprint(ciudades)
 
 lista = ['Arequipa', 'Cusco', 'Tumbes']
-lista.remove('Arequipa')
+# lista.remove('Arequipa')
 # print(lista)
+
+for x, y in enumerate(lista):
+    print(x, y)
