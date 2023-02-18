@@ -16,11 +16,11 @@ vehiculo = Vehiculo("rojo", "V21-543", "Honda")
 # print(vehiculo.concatenarCaracteristicas())
 
 class Alumno:
-    def __init__(self, nombre, edad) -> None:
-        self.nombre = nombre
-        self.edad = edad
+    def __init__(self, nom, ed):
+        self.nombre = nom
+        self.edad = ed
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f'Nombre: {self.nombre}, Edad: {self.edad}'
     
     def mostrarNombre(self):
@@ -28,7 +28,9 @@ class Alumno:
 
     def mostrarEdad(self):
         return self.edad 
-    
+
 x = Alumno('Eduardo', 30)
 
-print(x.mostrarNombre())
+print(x)
+
+print(x.mostrarEdad())
