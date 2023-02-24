@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -47,7 +47,21 @@ def buscar_alumno(nombre):
 
 @app.route("/html")
 def html():
-  return "<button>Dame click</button>"
+  edad = 10
+  # return "<button>Dame click</button>"
+  return render_template('index.html', edad=edad)
+
+@app.route("/form-data", methods=['POST'])
+def form_data():
+  print(request.form)
+  return 'Form data recibido exitosamente'
+
+@app.route("/files", methods=['POST'])
+def files():
+  file_str = request.files['foto'].read().decode('utf8')
+  f = open('archivo.txt', 'w')
+  f.write(file_str)
+  return 'Archivo recibido exitosamente'
 
 # debug=True => Si realizamos algún cambio podremos verlo en tiempo real (se reiniciará el servidor)
 app.run(debug=True)
