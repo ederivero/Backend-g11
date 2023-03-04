@@ -9,8 +9,7 @@ from base_de_datos import conexion
 from models.nivel_model import Nivel
 from models.maestro_model import Maestro
 from models.seccion_model import Seccion
-from controllers.nivel_controller import NivelController
-
+from controllers.nivel_controller import NivelController, UnNivelController
 
 
 load_dotenv() # es en el encargado de leer el archivo .env si es que existe y agregar las variables en ese archivo como si fueran variables de entorno 
@@ -30,6 +29,7 @@ Migrate(app=app, db=conexion)
 
 # defino las rutas de mi API
 flask_api.add_resource(NivelController, '/nivel')
+flask_api.add_resource(UnNivelController,'/nivel/<id>')
 
 if __name__ == '__main__':
     app.run(debug=True)
