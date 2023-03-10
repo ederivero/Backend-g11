@@ -55,6 +55,10 @@ class UnNivelController(Resource):
         query: Query = conexion.session.query(Nivel)
         nivel_encontrado = query.filter_by(id= id).first()
         # TODO: Implementar si no existe ese nivel, retornar un message diciendo que el nivel no existe
+        if nivel_encontrado == None:
+            return {
+                'message': "Nivel no encontrado"
+            }    
         dto = NivelDto()
         resultado = dto.dump(nivel_encontrado)
 
