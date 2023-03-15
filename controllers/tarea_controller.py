@@ -1,6 +1,6 @@
 from flask_restful import Resource, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
+from sqlalchemy.orm import Query
 from models.tarea_model import Tarea
 from bd import conexion
 from dtos.tarea_dto import TareaDto
@@ -27,10 +27,18 @@ class TareasController(Resource):
             }
 
         
-
+    @jwt_required()
     def get(self):
         # TODO: devolver todas las tareas del usuario
-        pass
+        usuario_id = get_jwt_identity()
+        query:Query = conexion.session.query(Tarea)
+        data = query.filter_by(usuarioId = usuario_id).all()
+        dto = TareaDto()
+        resultado = dto.dump(data, many=True)
+
+        return {
+            'content': resultado
+        }
 
 class TareaController(Resource):
     @jwt_required()
