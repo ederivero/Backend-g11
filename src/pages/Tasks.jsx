@@ -1,16 +1,26 @@
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Card } from "../components/Card";
-import { axios } from "../lib/fetchData";
 import { Header } from "../components/Header";
 import styles from "../styles/Tasks.module.css";
 import { Modal } from "../components/Modal";
 
-const { read } = axios("http://127.0.0.1:5000/tareas");
-
 export const Tasks = () => {
-  const [tasks, setTasks] = useState(read().content);
+  const [tasks, setTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch("http://127.0.0.1:5000/tareas", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      setTasks(data.content);
+    };
+    getData();
+  }, []);
 
   if (!localStorage.getItem("token")) {
     return <Navigate to="/" />;
