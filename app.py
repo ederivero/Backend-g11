@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 from datetime import timedelta
 
 from controllers.usuario_controller import UsuariosController, LoginController, PerfilController
-from controllers.tarea_controller import TareasController
+from controllers.tarea_controller import TareasController, TareaController
 from bd import conexion
 
 app = Flask(__name__)
@@ -27,5 +27,6 @@ api.add_resource(UsuariosController, '/registro')
 api.add_resource(LoginController, '/login')
 api.add_resource(PerfilController, '/perfil')
 api.add_resource(TareasController, '/tareas')
+api.add_resource(TareaController, '/buscar-tarea')
 if __name__ == '__main__':
     app.run(debug=True)
