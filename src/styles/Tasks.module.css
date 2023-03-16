@@ -1,0 +1,43 @@
+.tasks {
+  min-height: 100vh;
+  height: 100%;
+}
+
+.tasks_content {
+  background-color: #eeeeee;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 20px;
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+}
+
+.open_modal {
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.open_modal_btn {
+  height: 60px;
+  width: 60px;
+  border-radius: 60px;
+  margin-left: auto;
+  background-color: #2b772e;
+  border: none;
+  cursor: pointer;
+}
