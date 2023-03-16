@@ -23,8 +23,9 @@ export const Modal = ({ setShowModal, showModal }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(newTask),
+        body: JSON.stringify({...newTask, fechaVencimiento: `${newTask.fechaVencimiento} 00:00:00`}),
       });
       const status = response.status;
       const data = await response.json();

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles/Sign.module.css";
 
 export const SignIn = () => {
-  const [userData, setUserData] = useState({ username: "", password: "" });
+  const [userData, setUserData] = useState({ correo: "", password: "" });
   const [alert, setAlert] = useState({ message: "", type: "", show: false });
   const navigate = useNavigate();
 
@@ -22,6 +22,7 @@ export const SignIn = () => {
     });
     const status = response.status;
     const data = await response.json();
+
     if (status === 200) {
       localStorage.setItem("token", data.content);
       navigate("/tareas");
@@ -40,7 +41,8 @@ export const SignIn = () => {
             <label htmlFor="username">Username</label>
             <input
               type="text"
-              placeholder="Username"
+              name="correo"
+              placeholder="Correo"
               onChange={handleInputChange}
             />
           </div>
@@ -48,6 +50,7 @@ export const SignIn = () => {
             <label htmlFor="password">Password</label>
             <input
               type="password"
+              name="password"
               placeholder="Password"
               onChange={handleInputChange}
             />
