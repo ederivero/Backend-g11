@@ -12,6 +12,6 @@ class TareaDto(SQLAlchemyAutoSchema):
 
 class TareaFiltros(Schema):
     descripcion = fields.Str(required=False)
-    estado = EnumField(enum=EstadoTareaEnum)
+    estado = EnumField(enum=EstadoTareaEnum, required=False)
     fechaVencimiento = fields.DateTime(required=False)
     usuarioId = fields.Int(required=True)
