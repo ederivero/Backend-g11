@@ -76,6 +76,7 @@ class CategoriasController(Resource):
         query: Query = conexion.session.query(Categoria)
         resultado = query.all()
         dto = CategoriaDto()
+        
         data = dto.dump(resultado, many=True)
 
         return {
