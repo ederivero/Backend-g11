@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gestion'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'reservas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'reservas', # nombre de la base de datos
+        'HOST': 'localhost', # el host donde se ubicara mi base de datos
+        'USER': 'postgres', # el usuario de la base de datos
+        'PASSWORD': 'root', # la contraseña de la base de datos
+        'PORT': 5432 # puerto de la base de datos
     }
 }
 

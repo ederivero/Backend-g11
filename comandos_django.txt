@@ -3,3 +3,5 @@ python manage.py startapp NOMBRE > crea una nueva aplicacion para el proyecto
 python manage.py runserver       > levanta el servidor de django en DESARROLLO
 python manage.py showmigrations  > mostrara todas las migraciones en mi proyecto y las que no se han ejecutado se mostrara 'vacia' [ ] y las que si [X]
 python manage.py migrate         > ejecutara todas las migraciones pendientes
+python manage.py createsuperuser > da un formulario para crear un superusuario con acceso al panel administrativo
+python manage.py makemigrations NOMBRE_APP > crear una nueva migracion de los cambios 
