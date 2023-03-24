@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from .models import Categoria
-from .serializers import PruebaSerializer
+from .serializers import PruebaSerializer, CategoriaSerializer
 
 class PruebaView(APIView):
     def get(self, request):
@@ -39,10 +39,21 @@ class PruebaView(APIView):
 class CategoriaView(APIView):
     def post(self, request: Request):
         data = request.data
-        nueva_categoria = Categoria(nombre = data.get('nombre'), habilitado = data.get('habilitado'))
-        # save() > guardar la nueva informacion en la base de datos de manera permanente
-        nueva_categoria.save()
+        data_serializada = CategoriaSerializer(data=data)
 
-        return Response(data={
-            'message': 'Categoria creada exitosamente'
-        })
+        resultado = data_serializada.is_valid()
+        if resultado:
+            print(data_serializada.validated_data)
+            nueva_categoria = Categoria(**data_serializada.validated_data)
+            # save() > guardar la nueva informacion en la base de datos de manera permanente
+            nueva_categoria.save()
+
+            return Response(data={
+                'message': 'Categoria creada exitosamente'
+            })
+        
+        else:
+            return Response(data={
+                'message': 'Error al crear la categoria',
+                'content': data_serializada.errors
+            })
