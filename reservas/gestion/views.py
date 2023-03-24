@@ -80,7 +80,7 @@ class UnaCategoriaView(APIView):
         if not categoria_encontrada:
             return Response(data={
                 'message': 'categoria no existe'
-            })
+            }, status=404)
         
         resultado = CategoriaSerializer(instance=categoria_encontrada)
 
@@ -95,7 +95,7 @@ class UnaCategoriaView(APIView):
         if not categoria_encontrada:
             return Response(data={
                 'message': 'categoria no existe'
-            })
+            }, status=404)
         
         data = request.data
         data_serializada = CategoriaSerializer(data=data)
