@@ -5,3 +5,4 @@ python manage.py showmigrations  > mostrara todas las migraciones en mi proyecto
 python manage.py migrate         > ejecutara todas las migraciones pendientes
 python manage.py createsuperuser > da un formulario para crear un superusuario con acceso al panel administrativo
 python manage.py makemigrations NOMBRE_APP > crear una nueva migracion de los cambios 
+python manage.py sqlmigrate NOMBRE_APP NUM_MIGRACION > mostrar el lenguaje SQL que contiene esa migracion
