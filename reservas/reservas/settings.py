@@ -128,3 +128,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Sirve para modificar el comportamiento de nuestra libreria DRF
+REST_FRAMEWORK = {
+    # PAGE_SIZE > para indicar cuantos elementos vamos a retornar por cada pagina
+    'PAGE_SIZE': 3,
+    # Que clase utilizara para realizar la paginacion
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+}
