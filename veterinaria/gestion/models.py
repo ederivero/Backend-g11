@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from cloudinary.models import CloudinaryField
 
 class ManejoUsuario(BaseUserManager):
     def create_superuser(self, correo, nombre, apellido, password, tipoUsuario):
@@ -49,3 +50,18 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     objects = ManejoUsuario()
     class Meta:
         db_table = 'usuarios'
+
+class Mascota(models.Model):
+    id = models.AutoField(primary_key=True, null=False)
+    nombre = models.TextField(null=False)
+    sexo = models.TextField(choices=[('HEMBRA', 'HEMBRA'), ('MACHO', 'MACHO')])
+    fechaNacimiento = models.DateField(db_column='fecha_nacimiento')
+    alergias = models.TextField()
+    
+    # https://cloudinary.com/documentation/image_upload_api_reference#upload_method
+    foto = CloudinaryField('foto')
+
+    cliente = models.ForeignKey(to=Usuario, on_delete=models.RESTRICT, db_column='cliente_id')
+
+    class Meta:
+        db_table = 'mascotas'
