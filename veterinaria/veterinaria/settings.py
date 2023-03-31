@@ -14,6 +14,7 @@ from pathlib import Path
 from os import environ
 from dotenv import load_dotenv
 from cloudinary import config, uploader, api
+from datetime import timedelta
 
 load_dotenv()
 
@@ -143,3 +144,13 @@ config(
     api_secret = environ.get('CLOUDINARY_API_SECRET'),
     secure = True
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT= {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1, minutes=15)
+}
