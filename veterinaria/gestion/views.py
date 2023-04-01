@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.request import Request
 from .serializers import RegistroUsuarioSerializer, MascotasSerializer
 from .models import Usuario, Mascota
@@ -9,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from .permissions import SoloClientes
 from cloudinary import uploader
 
-class RegistroUsuario(APIView):
+class RegistroUsuario(generics.GenericAPIView):
 
     def post(self, request: Request):
         serializador = RegistroUsuarioSerializer(data = request.data)
@@ -31,8 +32,8 @@ class RegistroUsuario(APIView):
                 'content': serializador.errors
             }, status=status.HTTP_400_BAD_REQUEST)
     
-from pprint import pprint
-class PerfilUsuario(APIView):
+    
+class PerfilUsuario(generics.GenericAPIView):
     # lo hara en orden > > > primero entrara al permiso de IsAuthenticate y luego si esta todo bien pasara al segundo permiso y asi sucesivamente, si algun permiso falla absolutamente se detiene todos los demas permisos
     permission_classes = [IsAuthenticated, SoloClientes]
 
@@ -44,7 +45,8 @@ class PerfilUsuario(APIView):
             'content': ''
         })
 
-class MascotasView(APIView):
+class MascotasView(generics.GenericAPIView):
+    serializer_class = MascotasSerializer
     permission_classes = [IsAuthenticated, SoloClientes]
 
     def post(self, request:Request):
