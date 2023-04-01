@@ -1,4 +1,5 @@
 entorno_django/
+venv/
 *.pyc
 
 .env
