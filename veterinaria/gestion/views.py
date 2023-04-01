@@ -50,28 +50,34 @@ class MascotasView(APIView):
     def post(self, request:Request):
         # foto = request.FILES.get('foto')
         # resultado = uploader.upload(foto)
-        data = {
-            'nombre': request.data.get('nombre'),
-            'sexo': request.data.get('sexo'),
-            'fechaNacimiento': request.data.get('fechaNacimiento'),
-            'alergias': request.data.get('alergias'),
-            'foto': request.FILES.get('foto'),
-            'cliente': request.data.get('cliente')
-        }
+        try:
+          data = {
+              'nombre': request.data.get('nombre'),
+              'sexo': request.data.get('sexo'),
+              'fechaNacimiento': request.data.get('fechaNacimiento'),
+              'alergias': request.data.get('alergias'),
+              'foto': request.FILES.get('foto'),
+              'cliente': request.data.get('cliente')
+          }
 
-        serializador = MascotasSerializer(data=data)
-        if serializador.is_valid():
-            serializador.save()
-            return Response(data= {
-                'message': 'Mascota creada exitosamente',
-                'content': serializador.data
-            }, status=status.HTTP_201_CREATED)
-        
-        else:
-            return Response(data={
-                'message': 'Error al crear mascota',
-                'content': serializador.errors
-            }, status=status.HTTP_400_BAD_REQUEST)
+          serializador = MascotasSerializer(data=data)
+          if serializador.is_valid():
+              serializador.save()
+              return Response(data= {
+                  'message': 'Mascota creada exitosamente',
+                  'content': serializador.data
+              }, status=status.HTTP_201_CREATED)
+          else:
+              return Response(data={
+                  'message': 'Error al crear mascota',
+                  'content': serializador.errors
+              }, status=status.HTTP_400_BAD_REQUEST)
+          
+        except Exception as e:
+          return Response(data={
+              'message': 'Error al crear mascota',
+              'content': str(e)
+          }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     def get(self, request:Request):
         mascotas = Mascota.objects.all()
