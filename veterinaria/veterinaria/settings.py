@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -159,3 +160,5 @@ SIMPLE_JWT= {
 }
 
 CORS_ALLOW_ALL_ORIGINS=True
+
+STATIC_ROOT = BASE_DIR / 'archivos_estaticos'
