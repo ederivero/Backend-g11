@@ -12,6 +12,7 @@ class MascotasSerializer(ModelSerializer):
         fields = '__all__'
 
     def to_representation(self, instance):
+        # https://www.django-rest-framework.org/api-guide/relations/#generic-relationships
         representacion = super().to_representation(instance)
         representacion['foto'] = instance.foto.url
         return representacion
