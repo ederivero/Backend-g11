@@ -1,4 +1,5 @@
 asgiref==3.6.0
+camelcase==0.2
 certifi==2022.12.7
 charset-normalizer==3.1.0
 cloudinary==1.32.0
@@ -9,6 +10,7 @@ django-cors-headers==3.14.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 drf-yasg==1.21.5
+gunicorn==20.1.0
 idna==3.4
 inflection==0.5.1
 itypes==1.2.0
