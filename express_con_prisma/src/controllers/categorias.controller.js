@@ -30,6 +30,16 @@ export const devolverCategoria = async (req, res) => {
     where: {
       id: +id,
     },
+    include: {
+      // productos: true, // seleccionamos toda la info de los productos
+      productos: {
+        // indicamos que columnas queremos visualizar
+        select: {
+          id: true,
+          nombre: true,
+        },
+      },
+    },
   });
 
   if (!categoria) {

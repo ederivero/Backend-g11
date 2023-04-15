@@ -32,5 +32,12 @@ model Producto {
   // https://www.prisma.io/docs/concepts/components/prisma-schema/relations
   categoria Categoria @relation(fields: [categoriaId], references: [id])
 
+  // No se puede repetir los valores de nombre-precio-categoriaId
+  // nombre  prec catId
+  // Shampoo 1.50    1 ✔️
+  // Shampoo 2.30    1 ✔️
+  // Shampoo 1.50    2 ✔️
+  // Shampoo 2.30    1 ❌ (ya existe)
+  @@unique([nombre, precio, categoriaId])
   @@map("productos")
 }
