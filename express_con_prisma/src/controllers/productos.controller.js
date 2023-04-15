@@ -43,7 +43,7 @@ export const devolverProducto = async (req, res) => {
   const { id } = req.params;
 
   const productoEncontrado = await Prisma.producto.findFirst({
-    where: { id },
+    where: { id: +id },
     include: { categoria: true },
   });
 
