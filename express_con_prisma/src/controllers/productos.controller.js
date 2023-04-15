@@ -4,6 +4,8 @@ export const crearProducto = async (req, res) => {
   const data = req.body;
 
   // SELECT id FROM categorias WHERE id = ....;
+
+  // TODO: Validar si la categoria en la cual se quiere crear el producto no este deshabilitada
   const categoria = await Prisma.categoria.findFirst({
     where: { id: data.categoriaId },
     select: { id: true },
@@ -56,4 +58,8 @@ export const devolverProducto = async (req, res) => {
   return res.json({
     content: productoEncontrado,
   });
+};
+
+export const actualizarProducto = async (req, res) => {
+  // TODO
 };
