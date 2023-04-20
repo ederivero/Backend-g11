@@ -16,13 +16,13 @@ enum TIPO_USUARIO {
 }
 
 model Usuario {
-  id           Int          @id @default(autoincrement())
-  nombre       String
-  apellido     String
-  correo       String       @unique
-  password     String
-  tipo_usuario TIPO_USUARIO @default(CLIENTE)
-  carrito      Carrito?
+  id          Int          @id @default(autoincrement())
+  nombre      String
+  apellido    String
+  correo      String       @unique
+  password    String
+  tipoUsuario TIPO_USUARIO @default(CLIENTE) @map("tipo_usuario")
+  carrito     Carrito?
 
   @@map("usuarios")
 }
@@ -37,14 +37,14 @@ model Carrito {
 }
 
 model Producto {
-  id            Int            @id @default(autoincrement())
-  nombre        String
-  precio        Float
-  precio_oferta Float
-  disponible    Boolean        @default(true)
-  descripcion   String?
-  procedencia   String
-  items         ItemsCarrito[]
+  id           Int            @id @default(autoincrement())
+  nombre       String
+  precio       Float
+  precioOferta Float          @map("precio_oferta")
+  disponible   Boolean        @default(true)
+  descripcion  String?
+  procedencia  String
+  items        ItemsCarrito[]
 
   @@map("productos")
 }
