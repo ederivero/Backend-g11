@@ -9,3 +9,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum TIPO_USUARIO {
+  ADMIN
+  CLIENTE
+}
+
+model Usuario {
+  id           Int          @id @default(autoincrement())
+  nombre       String
+  apellido     String
+  correo       String       @unique
+  password     String
+  tipo_usuario TIPO_USUARIO @default(CLIENTE)
+  carrito      Carrito?
+
+  @@map("usuarios")
+}
+
+model Carrito {
+  id        Int            @id @default(autoincrement())
+  usuarioId Int            @unique @map("usuario_id")
+  usuario   Usuario        @relation(fields: [usuarioId], references: [id])
+  items     ItemsCarrito[]
+
+  @@map("carritos")
+}
+
+model Producto {
+  id            Int            @id @default(autoincrement())
+  nombre        String
+  precio        Float
+  precio_oferta Float
+  disponible    Boolean        @default(true)
+  descripcion   String?
+  procedencia   String
+  items         ItemsCarrito[]
+
+  @@map("productos")
+}
+
+model ItemsCarrito {
+  id         Int      @id @default(autoincrement())
+  carrito    Carrito  @relation(fields: [carritoId], references: [id])
+  carritoId  Int      @map("carrito_id")
+  producto   Producto @relation(fields: [productoId], references: [id])
+  productoId Int      @map("producto_id")
+  cantidad   Int
+
+  // Si queremos evitar utilizar una PK y utilizar dos o mas columnas como PK entonces usamos la propiedad @@id
+  // @@id([carritoId, productoId])
+  @@map("items_carritos")
+}
