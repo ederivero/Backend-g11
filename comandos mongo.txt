@@ -90,3 +90,68 @@ db.productos.find({
         disponible: true
     }]
 })
+
+
+-- Actualizaciones
+-- primero va el valor a buscar y luego los campos a modificar con la llave $set
+db.productos.updateOne({ nombre: 'piña'}, { $set: { precio: 5, disponible: false }} )
+
+
+-- para actualizar varios registros
+db.productos.updateMany({ precio: {$gt: 1 }}, { $set: {disponible: true }})
+
+
+-- Eliminaciones
+db.productos.deleteOne({ nombre: 'piña' })
+
+-- para eliminar varios productos
+db.productos.deleteMany({precio: { $gt: 1 } })
+
+db.categorias.insertMany([
+    {
+        nombre: 'Abarrotes',
+        descripcion: 'Todo relacionado a abarrotes',
+        productos: [
+            {
+                nombre: 'Detergente ayudin',
+                descripcion: 'A la grasa le pone fin',
+                precio: 7.50
+            },
+            {
+                nombre: 'Cepillo dental',
+                descripcion: 'Poderoso Cepillo',
+                precio: 1.80
+            }
+        ]
+    },
+    {
+        nombre: 'Verduras',
+        descripcion: 'Ricas verduras para la casa',
+        productos: [
+            {
+                nombre: 'Beterraga',
+                precio: 1.50,
+                descripcion: null
+            },
+            {
+                nombre: 'Cebolla china',
+                precio: 2.80,
+                descripcion: 'Cebolla 100% peruana'
+            },
+            {
+                nombre: 'Zucchini',
+                precio: 7.50,
+                descripcion: 'Calabacin italiano'
+            }
+        ]
+    }
+])
+
+
+-- Buscar todas las verduras cuyo precio sea mayor a 2.5 y solamente los productos con ese filtro
+db.categorias.aggregate([
+    { $match: {nombre: 'Verduras'}},
+    { $unwind: '$productos'},
+    { $match: {'productos.precio': {$gt: 2.5}}},
+    { $group: {_id: '$_id', productos: {$push: '$productos'}}}
+])
