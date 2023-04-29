@@ -4,7 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { usuarioRouter } from "./routes/usuarios.routes.js";
 import { eventoRouter } from "./routes/eventos.routes.js";
-
+import { imagenRouter } from "./routes/imagenes.routes.js";
 dotenv.config();
 
 const servidor = express();
@@ -21,6 +21,7 @@ servidor.use(express.json());
 
 servidor.use(usuarioRouter);
 servidor.use(eventoRouter);
+servidor.use(imagenRouter);
 
 servidor.listen(PORT, () => {
   console.log(`Servidor corriendo exitosamente en el puerto ${PORT}`);
